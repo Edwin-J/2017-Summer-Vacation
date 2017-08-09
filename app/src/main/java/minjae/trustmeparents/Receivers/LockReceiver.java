@@ -1,4 +1,4 @@
-package minjae.trustmeparents;
+package minjae.trustmeparents.Receivers;
 
 import android.app.KeyguardManager;
 import android.content.BroadcastReceiver;
@@ -7,11 +7,13 @@ import android.content.Intent;
 import android.telephony.PhoneStateListener;
 import android.telephony.TelephonyManager;
 
+import minjae.trustmeparents.Activities.LockActivity;
+
 /**
  * Created by Minjae on 2017-08-09.
  */
 
-public class Receiver extends BroadcastReceiver {
+public class LockReceiver extends BroadcastReceiver {
 
     private KeyguardManager manager = null;
     private KeyguardManager.KeyguardLock lock = null;
@@ -39,7 +41,7 @@ public class Receiver extends BroadcastReceiver {
                 Intent i = new Intent(context, LockActivity.class);
                 i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 context.startActivity(i);
-            } // 화면이 꺼지면 잠금화면 실행
+            } // 화면이 꺼졌다 켜지면 잠금 화면 실행
 
         }
 
@@ -60,7 +62,7 @@ public class Receiver extends BroadcastReceiver {
 
             switch (state) {
                 case TelephonyManager.CALL_STATE_IDLE : isPhoneCalling = true;
-                    break;
+                    break; // 전화 중이면 true
                 case TelephonyManager.CALL_STATE_RINGING : isPhoneCalling = false;
                     break;
                 case TelephonyManager.CALL_STATE_OFFHOOK : isPhoneCalling = false;

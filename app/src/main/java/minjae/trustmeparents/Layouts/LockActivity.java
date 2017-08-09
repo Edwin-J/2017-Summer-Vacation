@@ -1,9 +1,11 @@
-package minjae.trustmeparents;
+package minjae.trustmeparents.Activities;
 
 import android.app.Activity;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.WindowManager;
+
+import minjae.trustmeparents.R;
 
 public class LockActivity extends Activity {
 
