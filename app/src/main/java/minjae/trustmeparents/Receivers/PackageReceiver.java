@@ -6,7 +6,7 @@ import android.content.Context;
 import android.content.Intent;
 
 /**
- * Created by Father on 2017-08-09.
+ * Created by Minjae on 2017-08-09.
  */
 
 public class PackageReceiver extends BroadcastReceiver {

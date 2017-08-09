@@ -7,8 +7,6 @@ import android.content.Intent;
 import android.telephony.PhoneStateListener;
 import android.telephony.TelephonyManager;
 
-import minjae.trustmeparents.Activities.LockActivity;
-
 /**
  * Created by Minjae on 2017-08-09.
  */
@@ -38,7 +36,7 @@ public class LockReceiver extends BroadcastReceiver {
             if (isPhoneCalling) {
                 disableKeyguard();
 
-                Intent i = new Intent(context, LockActivity.class);
+                Intent i = new Intent(context, minjae.trustmeparents.Layouts.LockActivity.class);
                 i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 context.startActivity(i);
             } // 화면이 꺼졌다 켜지면 잠금 화면 실행

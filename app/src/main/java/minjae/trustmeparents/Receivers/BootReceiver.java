@@ -5,6 +5,8 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 
+import minjae.trustmeparents.RegisterService;
+
 /**
  * Created by Minjae on 2017-08-09.
  */
@@ -16,7 +18,7 @@ public class BootReceiver extends BroadcastReceiver {
     public void onReceive(Context context, Intent intent) {
 
         if (intent.getAction().equals(Intent.ACTION_BOOT_COMPLETED)) {
-            Intent i = new Intent(context, Service.class);
+            Intent i = new Intent(context, RegisterService.class);
             context.startService(i);
         }
 
