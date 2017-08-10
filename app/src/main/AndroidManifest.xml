@@ -17,7 +17,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".Layouts.LockActivity"/>
+        <activity android:name=".Layouts.LockActivity"
+            android:theme="@style/Theme.AppCompat.NoActionBar"/>
 
         <service android:name=".RegisterService"/>
         <receiver android:name=".Receivers.LockReceiver"/>

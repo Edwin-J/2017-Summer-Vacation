@@ -14,7 +14,6 @@ import minjae.trustmeparents.R;
 public class LockActivity extends AppCompatActivity implements View.OnClickListener{
 
     TextView hint;
-    TextView result;
 
     TextView btn_0;
     TextView btn_1;
@@ -26,14 +25,22 @@ public class LockActivity extends AppCompatActivity implements View.OnClickListe
     TextView btn_7;
     TextView btn_8;
     TextView btn_9;
-
     TextView clear;
+    TextView enter;
+
+    TextView input1;
+    TextView input2;
+    TextView input3;
+    TextView input4;
 
     int a;
     int b;
     int answer;
     int input[] = new int[4];
     int check;
+
+    String PASSWORD;
+    String INPUT;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,7 +51,6 @@ public class LockActivity extends AppCompatActivity implements View.OnClickListe
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_DISMISS_KEYGUARD); // 기본 잠금 화면 없애기
 
         hint = (TextView) findViewById(R.id.hint);
-        result = (TextView) findViewById(R.id.input);
         btn_0 = (TextView) findViewById(R.id.zero);
         btn_1 = (TextView) findViewById(R.id.one);
         btn_2 = (TextView) findViewById(R.id.two);
@@ -56,11 +62,22 @@ public class LockActivity extends AppCompatActivity implements View.OnClickListe
         btn_8 = (TextView) findViewById(R.id.eight);
         btn_9 = (TextView) findViewById(R.id.nine);
         clear = (TextView) findViewById(R.id.clear);
+        enter = (TextView) findViewById(R.id.ent);
+
+        input1 = (TextView) findViewById(R.id.input1);
+        input2 = (TextView) findViewById(R.id.input2);
+        input3 = (TextView) findViewById(R.id.input3);
+        input4 = (TextView) findViewById(R.id.input4);
 
         a = (int) (Math.random() * 9999);
         b = (int) (Math.random() * a);
         hint.setText(a + "-" + b);
         answer = a - b;
+
+        PASSWORD = String.valueOf(answer);
+        if (answer < 1000) {
+            PASSWORD = "0" + answer;
+        }
 
         btn_0.setOnClickListener(this);
         btn_1.setOnClickListener(this);
@@ -73,6 +90,7 @@ public class LockActivity extends AppCompatActivity implements View.OnClickListe
         btn_8.setOnClickListener(this);
         btn_9.setOnClickListener(this);
         clear.setOnClickListener(this);
+        enter.setOnClickListener(this);
 
     }
 
@@ -116,19 +134,38 @@ public class LockActivity extends AppCompatActivity implements View.OnClickListe
                 case R.id.nine:
                     input[i] = 9;
                     break;
+                case R.id.ent:
+                    if (PASSWORD == INPUT)
+                        finish();
+                    else {
+                        Toast toast = Toast.makeText(getApplicationContext(), "Wrong password", Toast.LENGTH_SHORT);
+                        toast.show();
+                    }
+                    break;
+            }
+
+            switch (i) {
+                case 0 :
+                    input1.setText("" + input[0]);
+                    break;
+                case 1 :
+                    input2.setText("" + input[1]);
+                    break;
+                case 2 :
+                    input3.setText("" + input[2]);
+                    break;
+                case 3 :
+                    input4.setText("" + input[3]);
+                    break;
             }
 
         }
 
         check = (input[0] * 1000) + (input[1] * 100) + (input[2] * 10) + (input[3] * 1);
-        result.setText(check);
+        if (check < 1000)
+            INPUT = "0" + check;
+        //result.setText(check).toString();
 
-        if (check == answer)
-            finish();
-        else {
-            Toast toast = Toast.makeText(getApplicationContext(), "Wrong password", Toast.LENGTH_LONG);
-            toast.show();
-        }
 
     }
 

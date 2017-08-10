@@ -26,7 +26,8 @@ public class LockReceiver extends BroadcastReceiver {
             if (manager == null)
                 manager = (KeyguardManager) context.getSystemService(Context.KEYGUARD_SERVICE);
 
-            if (lock == null) lock = manager.newKeyguardLock(Context.KEYGUARD_SERVICE);
+            if (lock == null)
+                lock = manager.newKeyguardLock(Context.KEYGUARD_SERVICE);
 
             if (telephonyManager == null) {
                 telephonyManager = (TelephonyManager) context.getSystemService(Context.TELEPHONY_SERVICE);

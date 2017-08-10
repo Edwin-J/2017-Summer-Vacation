@@ -6,7 +6,6 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.IBinder;
 
-import minjae.trustmeparents.R;
 import minjae.trustmeparents.Receivers.LockReceiver;
 import minjae.trustmeparents.Receivers.PackageReceiver;
 
@@ -59,10 +58,12 @@ public class RegisterService extends Service{
     public void onDestroy() {
         super.onDestroy();
 
+        //lockReceiver.reenableKeyguard();
+
         if (lockReceiver != null) unregisterReceiver(lockReceiver);
         if (packageReceiver != null) unregisterReceiver(packageReceiver);
 
-        lockReceiver.reenableKeyguard();
+
     }
 
 }
