@@ -2,18 +2,22 @@ package minjae.trustmeparents.Layouts;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.view.WindowManager;
+import android.view.animation.AccelerateDecelerateInterpolator;
+import android.view.animation.Animation;
+import android.view.animation.RotateAnimation;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import minjae.trustmeparents.R;
 
-public class LockActivity extends AppCompatActivity implements View.OnClickListener{
+import static java.sql.Types.NULL;
 
-    TextView hint;
+public class LockActivity extends AppCompatActivity {
 
     TextView btn_0;
     TextView btn_1;
@@ -33,14 +37,9 @@ public class LockActivity extends AppCompatActivity implements View.OnClickListe
     TextView input3;
     TextView input4;
 
-    int a;
-    int b;
-    int answer;
-    int input[] = new int[4];
-    int check;
+    String input[] = new String[4];
 
-    String PASSWORD;
-    String INPUT;
+    String PW = "7890";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,9 +47,11 @@ public class LockActivity extends AppCompatActivity implements View.OnClickListe
         setContentView(R.layout.activity_lock);
 
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_SHOW_WHEN_LOCKED); // 기본 잠금 화면 위에 띄우기
-        getWindow().addFlags(WindowManager.LayoutParams.FLAG_DISMISS_KEYGUARD); // 기본 잠금 화면 없애기
+        //getWindow().addFlags(WindowManager.LayoutParams.FLAG_DISMISS_KEYGUARD); // 기본 잠금 화면 없애기
 
-        hint = (TextView) findViewById(R.id.hint);
+        Intent pwIntent = getIntent();
+        //PW = pwIntent.getExtras().getString("password", "0000");
+
         btn_0 = (TextView) findViewById(R.id.zero);
         btn_1 = (TextView) findViewById(R.id.one);
         btn_2 = (TextView) findViewById(R.id.two);
@@ -69,103 +70,243 @@ public class LockActivity extends AppCompatActivity implements View.OnClickListe
         input3 = (TextView) findViewById(R.id.input3);
         input4 = (TextView) findViewById(R.id.input4);
 
-        a = (int) (Math.random() * 9999);
-        b = (int) (Math.random() * a);
-        hint.setText(a + "-" + b);
-        answer = a - b;
+        btn_0.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
 
-        PASSWORD = String.valueOf(answer);
-        if (answer < 1000) {
-            PASSWORD = "0" + answer;
-        }
+                if (input[0] == null) {
+                    input[0] = "0";
+                    input1.setText("0");
+                }
+                else if (input[1] == null) {
+                    input[1] = "0";
+                    input2.setText("0");
+                }
+                else if (input[2] == null) {
+                    input[2] = "0";
+                    input3.setText("0");
+                }
+                else if (input[3] == null) {
+                    input[3] = "0";
+                    input4.setText("0");
+                }
 
-        btn_0.setOnClickListener(this);
-        btn_1.setOnClickListener(this);
-        btn_2.setOnClickListener(this);
-        btn_3.setOnClickListener(this);
-        btn_4.setOnClickListener(this);
-        btn_5.setOnClickListener(this);
-        btn_6.setOnClickListener(this);
-        btn_7.setOnClickListener(this);
-        btn_8.setOnClickListener(this);
-        btn_9.setOnClickListener(this);
-        clear.setOnClickListener(this);
-        enter.setOnClickListener(this);
-
-    }
-
-    public void onClick(View v) {
-
-        for (int i = 0; i < 4; i ++) {
-
-            switch (v.getId()) {
-
-                case R.id.clear:
-                    i -= 1;
-                    break;
-
-                case R.id.zero:
-                    input[i] = 0;
-                    break;
-                case R.id.one:
-                    input[i] = 1;
-                    break;
-                case R.id.two:
-                    input[i] = 2;
-                    break;
-                case R.id.three:
-                    input[i] = 3;
-                    break;
-                case R.id.four:
-                    input[i] = 4;
-                    break;
-                case R.id.five:
-                    input[i] = 5;
-                    break;
-                case R.id.six:
-                    input[i] = 6;
-                    break;
-                case R.id.seven:
-                    input[i] = 7;
-                    break;
-                case R.id.eight:
-                    input[i] = 8;
-                    break;
-                case R.id.nine:
-                    input[i] = 9;
-                    break;
-                case R.id.ent:
-                    if (PASSWORD == INPUT)
-                        finish();
-                    else {
-                        Toast toast = Toast.makeText(getApplicationContext(), "Wrong password", Toast.LENGTH_SHORT);
-                        toast.show();
-                    }
-                    break;
             }
-
-            switch (i) {
-                case 0 :
-                    input1.setText("" + input[0]);
-                    break;
-                case 1 :
-                    input2.setText("" + input[1]);
-                    break;
-                case 2 :
-                    input3.setText("" + input[2]);
-                    break;
-                case 3 :
-                    input4.setText("" + input[3]);
-                    break;
+        });
+        btn_1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (input[0] == null) {
+                    input[0] = "1";
+                    input1.setText("1");
+                }
+                else if (input[1] == null) {
+                    input[1] = "1";
+                    input2.setText("1");
+                }
+                else if (input[2] == null) {
+                    input[2] = "1";
+                    input3.setText("1");
+                }
+                else if (input[3] == null) {
+                    input[3] = "1";
+                    input4.setText("1");
+                }
             }
+        });
+        btn_2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (input[0] == null)
+                    input[0] = "2";
+                else if (input[1] == null)
+                    input[1] = "2";
+                else if (input[2] == null)
+                    input[2] = "2";
+                else if (input[3] == null)
+                    input[3] = "2";
+            }
+        });
+        btn_3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (input[0] == null) {
+                    input[0] = "3";
+                    input1.setText("3");
+                }
+                else if (input[1] == null) {
+                    input[1] = "3";
+                    input2.setText("3");
+                }
+                else if (input[2] == null) {
+                    input[2] = "3";
+                    input3.setText("3");
+                }
+                else if (input[3] == null) {
+                    input[3] = "3";
+                    input4.setText("3");
+                }
+            }
+        });
+        btn_4.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (input[0] == null) {
+                    input[0] = "4";
+                    input1.setText("4");
+                }
+                else if (input[1] == null) {
+                    input[1] = "4";
+                    input2.setText("4");
+                }
+                else if (input[2] == null) {
+                    input[2] = "4";
+                    input3.setText("4");
+                }
+                else if (input[3] == null) {
+                    input[3] = "4";
+                    input4.setText("4");
+                }
+            }
+        });
+        btn_5.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (input[0] == null) {
+                    input[0] = "5";
+                    input1.setText("5");
+                }
+                else if (input[1] == null) {
+                    input[1] = "5";
+                    input2.setText("5");
+                }
+                else if (input[2] == null) {
+                    input[2] = "5";
+                    input3.setText("5");
+                }
+                else if (input[3] == null) {
+                    input[3] = "5";
+                    input4.setText("5");
+                }
+            }
+        });
+        btn_6.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (input[0] == null) {
+                    input[0] = "6";
+                    input1.setText("6");
+                }
+                else if (input[1] == null) {
+                    input[1] = "6";
+                    input2.setText("6");
+                }
+                else if (input[2] == null) {
+                    input[2] = "6";
+                    input3.setText("6");
+                }
+                else if (input[3] == null) {
+                    input[3] = "6";
+                    input4.setText("6");
+                }
+            }
+        });
+        btn_7.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (input[0] == null) {
+                    input[0] = "7";
+                    input1.setText("7");
+                }
+                else if (input[1] == null) {
+                    input[1] = "7";
+                    input2.setText("7");
+                }
+                else if (input[2] == null) {
+                    input[2] = "7";
+                    input3.setText("7");
+                }
+                else if (input[3] == null) {
+                    input[3] = "7";
+                    input4.setText("7");
+                }
+            }
+        });
+        btn_8.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (input[0] == null) {
+                    input[0] = "8";
+                    input1.setText("8");
+                }
+                else if (input[1] == null) {
+                    input[1] = "8";
+                    input2.setText("8");
+                }
+                else if (input[2] == null) {
+                    input[2] = "8";
+                    input3.setText("8");
+                }
+                else if (input[3] == null) {
+                    input[3] = "8";
+                    input4.setText("8");
+                }
+            }
+        });
+        btn_9.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (input[0] == null) {
+                    input[0] = "9";
+                    input1.setText("9");
+                }
+                else if (input[1] == null) {
+                    input[1] = "9";
+                    input2.setText("9");
+                }
+                else if (input[2] == null) {
+                    input[2] = "9";
+                    input3.setText("9");
+                }
+                else if (input[3] == null) {
+                    input[3] = "9";
+                    input4.setText("9");
+                }
+            }
+        });
+        clear.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (input[0] == null)
+                    ;
+                else if (input[1] == null)
+                    input[0] = null;
+                else if (input[2] == null)
+                    input[1] = null;
+                else if (input[3] == null)
+                    input[2] = null;
+            }
+        });
+        enter.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
 
-        }
+                String INPUT = "" + input[0] + input[1] + input[2] + input[3];
 
-        check = (input[0] * 1000) + (input[1] * 100) + (input[2] * 10) + (input[3] * 1);
-        if (check < 1000)
-            INPUT = "0" + check;
-        //result.setText(check).toString();
+                if ( INPUT.equals(PW) )
+                    finish();
 
+                else {
+                    Toast toast = Toast.makeText(getApplicationContext(), "Wrong password.", Toast.LENGTH_SHORT);
+                    toast.show();
+                    input[0] = null; input1.setText("");
+                    input[1] = null; input2.setText("");
+                    input[2] = null; input3.setText("");
+                    input[3] = null; input4.setText("");
+                }
+
+            }
+        });
 
     }
 
