@@ -40,9 +40,7 @@ public class MainActivity extends AppCompatActivity {
         setpw = (EditText) findViewById(R.id.setpw);
         sharedPreferences = getSharedPreferences("password", MODE_PRIVATE);
         PW = sharedPreferences.getString("password", "0000");
-        if (PW != "0000") {
-            setpw.setText(PW);
-        }
+        setpw.setText(PW);
 
         on = (Button) findViewById(R.id.on);
         off = (Button) findViewById(R.id.off);
@@ -75,7 +73,7 @@ public class MainActivity extends AppCompatActivity {
                 editor.commit(); // SharedPreferences에 비밀번호 저장.
 
                 Intent intent = new Intent();
-                intent.putExtra("password", PW);
+                intent.putExtra("password", PW); // intent에 값 저장
                 Toast toast = Toast.makeText(getApplicationContext(), "Saved your password : " + PW, Toast.LENGTH_SHORT);
                 toast.show();
             }

@@ -38,8 +38,10 @@ public class LockActivity extends AppCompatActivity {
     TextView input4;
 
     String input[] = new String[4];
+    // 사용자가 입력해주는 값 저장
 
-    String PW = "7890";
+    String PW = "4587";
+    // MainActivity에서 intent로 넘겨준 값 저장
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,7 +52,8 @@ public class LockActivity extends AppCompatActivity {
         //getWindow().addFlags(WindowManager.LayoutParams.FLAG_DISMISS_KEYGUARD); // 기본 잠금 화면 없애기
 
         Intent pwIntent = getIntent();
-        //PW = pwIntent.getExtras().getString("password", "0000");
+        PW = pwIntent.getExtras().getString("password", "0000");
+        // MainActivity에서 넘겨준 값 받기
 
         btn_0 = (TextView) findViewById(R.id.zero);
         btn_1 = (TextView) findViewById(R.id.one);
@@ -90,7 +93,7 @@ public class LockActivity extends AppCompatActivity {
                     input[3] = "0";
                     input4.setText("0");
                 }
-
+                // 이런 식으로 각 버튼을 누를 때 마다 배열에 빈 공간을 찾아서 해당 숫자 넣음
             }
         });
         btn_1.setOnClickListener(new View.OnClickListener() {
@@ -292,6 +295,7 @@ public class LockActivity extends AppCompatActivity {
             public void onClick(View view) {
 
                 String INPUT = "" + input[0] + input[1] + input[2] + input[3];
+                // input 배열에 저장된 숫자들을 문자열로 변환
 
                 if ( INPUT.equals(PW) )
                     finish();
@@ -303,6 +307,7 @@ public class LockActivity extends AppCompatActivity {
                     input[1] = null; input2.setText("");
                     input[2] = null; input3.setText("");
                     input[3] = null; input4.setText("");
+                    // 틀리면 다 날라감
                 }
 
             }
